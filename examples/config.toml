@@ -1,0 +1,30 @@
+# ~/.config/rice/config.toml
+
+wallpaper_dir = "~/Pictures/walls"
+
+# swww | hyprpaper | mpvpaper | none
+backend = "swww"
+
+# next/prev walk order
+sort = "name"          # name | mtime | random ( random coming later )
+
+# files to treat as walls
+extensions = ["jpg", "jpeg", "png", "webp"]
+
+[theme]
+enable = true          # run wallust after a change
+command = "wallust"
+# extra args after the image path, if you need them
+args = []
+
+[bar]
+restart_on_theme = true
+command = "waybar"
+
+[session]
+# old startup.sh — order matters
+exec = [
+  "waybar",
+  "swaync",
+  "discord",
+]
