@@ -14,6 +14,7 @@ pub fn set(path: &Path, backend: &str) -> Result<()> {
     } 
 }
 
-pub fn toggle(state: &State, cfg: &Config) -> Result<()> {
+
+pub fn _toggle(_state: &State, _cfg: &Config) -> Result<()> {
     Ok(())
 }

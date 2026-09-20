@@ -37,6 +37,13 @@ pub fn config_file() -> Result<PathBuf> {
     Ok(config_dir()?.join("config.toml"))
 }
 
+/// `~/.config/rice/icon.png`
+///
+/// Image gets stored in folder on first build
+pub fn icon_file() -> Result<PathBuf> {
+    Ok(config_dir()?.join("icon.png"))
+}
+
 /// `~/.cache/rice/state.json`
 ///
 /// Does not create the file. `state::save` should `ensure_dir` first.

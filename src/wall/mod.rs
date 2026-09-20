@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 use anyhow::{bail, Result};
 use std::fs;
-use crate::{config::Config, notifications::notification_success, state::State};
+use crate::{config::Config, state::State};
 use crate::theme;
 
 pub mod backend;
@@ -48,8 +48,7 @@ fn step(delta: isize) -> Result<()> {
     theme::apply(&images[next], &cfg)?;
     state.wallpaper = Some(images[next].clone());
     state.backend = Some(backend.to_string());
-    state.save()?;
-    notification_success("Success", "Wallpaper and colors saved and set");
+    state.save()?; 
     println!("{}", images[next].display());
     Ok(())
 }
@@ -82,10 +81,26 @@ pub fn start() -> Result<()> {
     theme::apply(&path, &cfg)?;
     state.wallpaper = Some(path.clone());
     state.backend = Some(backend);
-    state.save()?;
-    notification_success("Success", "Rice successfully started");
+    state.save()?; 
     println!("{}", path.display());
     Ok(())
 }
 
 
+#[cfg(test)]
+mod tests { 
+
+    #[test]
+    fn wrap_next_from_last() {
+        let n: isize = 3;
+        let idx: isize = 2;
+        assert_eq!((idx + 1).rem_euclid(n) as usize, 0);
+    }
+
+    #[test]
+    fn wrap_prev_from_first() {
+        let n: isize = 3;
+        let idx: isize = 0;
+        assert_eq!((idx + -1).rem_euclid(n) as usize, 2);
+    }
+}

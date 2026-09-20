@@ -1,1 +1,1 @@
-pub type Result<T> = anyhow::Result<T>;
+// revisiting this later to add errors specific to different parts
