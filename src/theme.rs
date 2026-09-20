@@ -1,5 +1,5 @@
 use serde::Deserialize;
-use crate::config::Config;
+use crate::{config::Config, paths};
 use std::path::Path;
 use anyhow::{Result, Context};
 use crate::cmd;
@@ -26,16 +26,22 @@ pub fn apply(path: &Path, cfg: &Config) -> Result<()> {
     if !cfg.theme.enable {
         return Ok(());
     }
+    
+    let p = paths::expand_tilde(path);
 
-    let img = path
+    let img = p
         .to_str()
         .context("wallpaper path is not valid utf-8")?;
 
-    let mut args: Vec<String> = vec![img.to_string()];
+    let mut args: Vec<String> = vec!["run".into(), img.to_string()];
     if let Some(extra) = &cfg.theme.args {
         args.extend(extra.iter().cloned());
     }
 
     let args_ref: Vec<&str> = args.iter().map(String::as_str).collect();
-    cmd::run(&cfg.theme.command, &args_ref)
+    cmd::run(&cfg.theme.command, &args_ref)?;
+    if cfg.bar.restart_on_theme {
+        crate::bar::restart(cfg)?;
+    }
+    Ok(())
 }

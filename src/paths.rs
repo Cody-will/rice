@@ -11,8 +11,6 @@ use std::{
 use anyhow::{Context, Result};
 use directories::ProjectDirs;
 
-const EXAMPLE: &str = include_str!("../examples/config.toml");
-
 
 /// XDG project dirs for the qualifier `rice`
 /// (`~/.config/rice`, `~/.cache/rice` on Linux).

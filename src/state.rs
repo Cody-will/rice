@@ -1,4 +1,4 @@
-use std::{path::PathBuf, str::pattern::Utf8Pattern::StringPattern};
+use std::path::PathBuf;
 
 use anyhow::{Context, Result};
 use serde::{Serialize, Deserialize};
@@ -8,8 +8,8 @@ use crate::paths;
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(default)]
 pub struct State {
-    wallpaper: Option<PathBuf>,
-    backend: Option<String>,
+    pub wallpaper: Option<PathBuf>,
+    pub backend: Option<String>,
 }
 
 
@@ -56,4 +56,5 @@ impl State {
 
         Ok(())
     }
+ 
 }

@@ -62,5 +62,30 @@ pub fn prev() -> Result<()> {
     step(-1) 
 }
 
+pub fn start() -> Result<()> {
+    let cfg = Config::load()?;
+    let mut state = State::load()?;
+    let images = list_images(&cfg)?;
+
+    let path = state.wallpaper
+        .as_ref()
+        .and_then(|cur| images.iter().find(|p| *p == cur))
+        .unwrap_or(&images[0])
+        .clone();
+    
+    let backend = state.backend
+        .as_deref()
+        .unwrap_or(cfg.backend.as_str())
+        .to_string();
+
+    backend::set(&path, &backend)?;
+    theme::apply(&path, &cfg)?;
+    state.wallpaper = Some(path.clone());
+    state.backend = Some(backend);
+    state.save()?;
+    notification_success("Success", "Rice successfully started");
+    println!("{}", path.display());
+    Ok(())
+}
 
 
