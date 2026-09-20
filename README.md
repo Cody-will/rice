@@ -4,7 +4,7 @@
 
 <img src="rice.png" width="30%" alt="Project Logo"/>
 
-# RICE
+# rice
 
 <em>Wallpaper, wallust, and session helpers for Hyprland</em>
 
