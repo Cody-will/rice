@@ -14,7 +14,7 @@ extensions = ["jpg", "jpeg", "png", "webp"]
 enable = true          # run wallust after a change
 command = "wallust"
 # extra args after the image path, if you need them
-args = []
+args = ["run"]
 
 [bar]
 restart_on_theme = true
@@ -27,3 +27,7 @@ exec = [
   "swaync",
   "discord",
 ]
+
+[notifications]
+on_success = false
+on_error = true
