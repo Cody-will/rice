@@ -1,6 +1,7 @@
 use std::path::PathBuf;
 use anyhow::{Context, Result};
 use serde::{Deserialize};
+use crate::notifications::Notifications;
 use crate::paths;
 use crate::theme::Theme;
 use crate::bar::Bar;
@@ -10,13 +11,14 @@ const DEFAULT: &str = include_str!("../examples/config.toml");
 
 #[derive(Deserialize, Debug)]
 pub struct Config {
-    wallpaper_dir: PathBuf,
-    backend: String,
-    sort: String,
-    extensions: Vec<String>,
-    theme: Theme,
-    bar: Bar,
-    session: Session,
+    pub wallpaper_dir: PathBuf,
+    pub backend: String,
+    pub sort: String,
+    pub extensions: Vec<String>,
+    pub theme: Theme,
+    pub bar: Bar,
+    pub session: Session,
+    pub notifications: Notifications,
 }
 
 
@@ -40,6 +42,10 @@ impl Config {
         cfg.wallpaper_dir = paths::expand_tilde(&cfg.wallpaper_dir);
 
         Ok(cfg)
+    }
+    
+    pub fn is_valid_img(&self, img_ext: &str) -> bool {
+        self.extensions.contains(&img_ext.to_string())
     }
 }
 
