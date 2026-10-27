@@ -3,6 +3,7 @@ wallpaper_dir = "~/Pictures/walls"
 
 # swww | hyprpaper | mpvpaper | none
 backend = "swww"
+other_backends = []
 
 # next/prev walk order
 sort = "name"          # name | mtime | random ( random coming later )

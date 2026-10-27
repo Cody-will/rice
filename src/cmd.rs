@@ -7,7 +7,7 @@ pub fn run(bin: &str, args: &[&str]) -> Result<()> {
         .status()
         .with_context(|| format!("failed to start {bin}"))?;
     
-    if !status.success() {
+    if !status.success() && !args.contains(&"waybar") {
         bail!("{bin} exited with {status}");
     }
 

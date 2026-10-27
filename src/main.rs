@@ -9,8 +9,9 @@ mod state;
 mod theme;
 mod wall;
 mod notifications;
+mod screenshot;
 
-use crate::config::Config;
+use crate::{cli::ScreenshotAction, config::Config};
 use anyhow::Result;
 use clap::Parser;
 use cli::{BarAction, Cli, Command, SessionAction, WallAction};
@@ -27,6 +28,9 @@ fn main() -> Result<()> {
         },
         Command::Session { action } => match action {
             SessionAction::Start => session::start(),
+        },
+        Command::Screenshot { action } => match action {
+            ScreenshotAction::ScreenshotMonitor => screenshot::caputure_monitor(),
         }
     };
     

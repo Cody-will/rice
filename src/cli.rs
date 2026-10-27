@@ -21,6 +21,10 @@ pub enum Command {
         #[command(subcommand)]
         action: SessionAction,
     },
+    Screenshot {
+        #[command(subcommand)]
+        action: ScreenshotAction,
+    }
 }
 
 #[derive(Subcommand)]
@@ -38,4 +42,9 @@ pub enum BarAction {
 #[derive(Subcommand)]
 pub enum SessionAction {
     Start,
+}
+
+#[derive(Subcommand)]
+pub enum ScreenshotAction {
+    ScreenshotMonitor,
 }
